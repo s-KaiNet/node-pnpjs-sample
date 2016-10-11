@@ -1,0 +1,4 @@
+node_modules
+settings.ts
+*.js
+typings

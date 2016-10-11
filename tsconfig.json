@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "sourceMap": false,
+    "declaration": false,
+    "noImplicitAny": false,
+    "pretty": true,
+    "removeComments": true
+  },
+  "files": [
+    "index.ts",
+    "settings.ts",
+    "typings/index.d.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "types": [
+    "core-js",
+    "node"
+  ]
+}
