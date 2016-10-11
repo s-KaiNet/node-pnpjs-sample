@@ -6,7 +6,7 @@ This sample contains minimal code required to run [`sp-pnp-js`](https://github.c
 
 1. Clone repository
 2. Rename `settings.sample.ts` into `settings.ts`
-3. Update `settings.ts` with appropriate values (credential in format, supported by `node-sp-auth`, for help please take a look at the [`credentialOptions param`](https://github.com/s-KaiNet/node-sp-auth#params))
+3. Update `settings.ts` with appropriate values (credentials in a format, supported by `node-sp-auth`, for help please take a look at the [`credentialOptions param`](https://github.com/s-KaiNet/node-sp-auth#params))
 4. `npm install`
 5. `npm run build` 
-6. You will see your web title taken with help for `sp-pnp-js` and `node-sp-auth` as authentication provider
+6. You will see your web title taken with help of `sp-pnp-js` and `node-sp-auth` as authentication provider
