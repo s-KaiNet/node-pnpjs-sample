@@ -2,7 +2,6 @@ import * as pnp from 'sp-pnp-js';
 import * as spauth from 'node-sp-auth';
 import * as _ from 'lodash';
 import * as fetch from 'node-fetch';
-import { Util } from 'sp-pnp-js';
 import * as https from 'https';
 import * as url from 'url';
 
@@ -19,7 +18,7 @@ global.Response = (<any>fetch).Response;
 global.fetch = (requestUrl: string, options: any) => {
 
     /* first get auth with help of node-sp-auth */
-    return spauth.getAuth(settings.siteUrl, settings.creds)
+    return spauth.getAuth(requestUrl, settings.creds)
         .then((data: any) => {
 
             /* attach headers and options received from node-sp-auth */
@@ -29,10 +28,6 @@ global.fetch = (requestUrl: string, options: any) => {
 
             headers['Accept'] = 'application/json;odata=verbose';
             headers['Content-Type'] = 'application/json;odata=verbose';
-
-            if (!Util.isUrlAbsolute(requestUrl)) {
-                requestUrl = Util.combinePaths(settings.siteUrl, requestUrl);
-            }
 
             let isHttps: boolean = url.parse(requestUrl).protocol === 'https:';
 
@@ -46,11 +41,24 @@ global.fetch = (requestUrl: string, options: any) => {
         });
 };
 
+/* replacing webAbsoluteUrl since we are on nodejs and window._spPageContextInfo is missing */
+global._spPageContextInfo = {
+    webAbsoluteUrl: settings.siteUrl
+};
+
 /* at this point we replaced global fetch with our version and can use pnp as is */
 pnp.sp.web.get()
-    .then(data => {
+    .then((data: any) => {
         console.log(`Your web title: ${data.Title}`);
+
+        /* dynamically changing the web */
+        global._spPageContextInfo.webAbsoluteUrl = settings.subSiteUrl;
+
+        return pnp.sp.web.get();
     })
-    .catch(err => {
+    .then((data: any) => {
+        console.log(`Your sub web title: ${data.Title}`);
+    })
+    .catch((err: any) => {
         console.log(err);
     });
