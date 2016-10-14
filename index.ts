@@ -41,24 +41,25 @@ global.fetch = (requestUrl: string, options: any) => {
         });
 };
 
-/* replacing webAbsoluteUrl since we are on nodejs and window._spPageContextInfo is missing */
-global._spPageContextInfo = {
-    webAbsoluteUrl: settings.siteUrl
-};
+let web: pnp.Web = new pnp.Web(settings.siteUrl);
 
 /* at this point we replaced global fetch with our version and can use pnp as is */
-pnp.sp.web.get()
+web.get()
     .then((data: any) => {
         console.log(`Your web title: ${data.Title}`);
 
-        /* dynamically changing the web */
-        global._spPageContextInfo.webAbsoluteUrl = settings.subSiteUrl;
+        /* changing the web: */
+        web = new pnp.Web(settings.subSiteUrl);
 
-        return pnp.sp.web.get();
+        return web.get();
     })
     .then((data: any) => {
         console.log(`Your sub web title: ${data.Title}`);
     })
     .catch((err: any) => {
         console.log(err);
+
+        if (err.stack) {
+            console.log(`StackTrace: ${err.stack}`);
+        }
     });
