@@ -11,14 +11,12 @@
   },
   "files": [
     "index.ts",
-    "settings.ts",
-    "typings/index.d.ts"
-  ],
-  "exclude": [
-    "node_modules"
+    "settings.ts"
   ],
   "types": [
     "core-js",
-    "node"
+    "node",
+    "lodash",
+    "node-fetch"
   ]
 }

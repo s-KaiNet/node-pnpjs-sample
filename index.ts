@@ -1,7 +1,8 @@
 import * as pnp from 'sp-pnp-js';
 import * as spauth from 'node-sp-auth';
 import * as _ from 'lodash';
-import * as fetch from 'node-fetch';
+import * as nodeFetch from 'node-fetch';
+import fetch from 'node-fetch';
 import * as https from 'https';
 import * as url from 'url';
 
@@ -10,9 +11,9 @@ import * as settings from './settings';
 declare var global: any;
 
 /* since sp-pnp-js uses window.fetch, we need to attach some global function from corresponding node-fetch module */
-global.Headers = (<any>fetch).Headers;
-global.Request = (<any>fetch).Request;
-global.Response = (<any>fetch).Response;
+global.Headers = nodeFetch.Headers;
+global.Request = nodeFetch.Request;
+global.Response = nodeFetch.Response;
 
 /* override global fetch function with your own implementation */
 global.fetch = (requestUrl: string, options: any) => {

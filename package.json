@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "build": "npm run ts && node index.js",
-    "postinstall": "typings install",
     "ts": "tsc -p tsconfig.json"
   },
   "repository": {
@@ -24,15 +23,15 @@
   },
   "homepage": "https://github.com/s-KaiNet/node-pnpjs-sample#readme",
   "devDependencies": {
+  },
+  "dependencies": {
+    "@types/lodash": "^4.14.38",
+    "@types/node-fetch": "^1.6.5",
     "@types/core-js": "^0.9.34",
     "@types/node": "^6.0.45",
-    "@types/whatwg-fetch": "0.0.32",
     "lodash": "^4.16.4",
     "node-fetch": "^1.6.3",
     "node-sp-auth": "^1.1.0",
-    "sp-pnp-js": "^1.0.5",
-    "typescript": "^2.0.3",
-    "typings": "^1.4.0",
-    "whatwg-fetch": "^1.0.0"
+    "sp-pnp-js": "^1.0.6"
   }
 }
